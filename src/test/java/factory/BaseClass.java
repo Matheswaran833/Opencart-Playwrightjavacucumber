@@ -33,20 +33,20 @@ public class BaseClass {
     	 {
     	 case "chrome":
              browser = playwright.chromium()
-                     .launch(new BrowserType.LaunchOptions().setChannel("chrome").setHeadless(false));
+                     .launch(new BrowserType.LaunchOptions().setChannel("chrome").setHeadless(true));
              break;
          case "msedge":
              browser = playwright.chromium()
-                     .launch(new BrowserType.LaunchOptions().setChannel("msedge").setHeadless(false));
+                     .launch(new BrowserType.LaunchOptions().setChannel("msedge").setHeadless(true));
              break;
          case "chromium":
-             browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+             browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(true));
              break;
          case "firefox":
-             browser = playwright.firefox().launch(new BrowserType.LaunchOptions().setHeadless(false));
+             browser = playwright.firefox().launch(new BrowserType.LaunchOptions().setHeadless(true));
              break;
          case "webkit":
-             browser = playwright.webkit().launch(new BrowserType.LaunchOptions().setHeadless(false));
+             browser = playwright.webkit().launch(new BrowserType.LaunchOptions().setHeadless(true));
              break;
 
          default:
