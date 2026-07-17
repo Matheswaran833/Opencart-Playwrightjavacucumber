@@ -1,9 +1,9 @@
-name: Playwright Cucumber Tests
+name: Playwright Tests
 on:
   push:
-    branches: [ main ]
+    branches: [ main, master ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, master ]
 jobs:
   test:
     timeout-minutes: 60
@@ -20,13 +20,3 @@ jobs:
       run: mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install --with-deps"
     - name: Run tests
       run: mvn test
-
-    - name: Upload Reports
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: cucumber-report
-        path: |
-          test-output/
-          target/
-          reports/  
