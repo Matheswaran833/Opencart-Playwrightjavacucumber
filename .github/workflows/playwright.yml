@@ -26,7 +26,7 @@ jobs:
       run: mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install --with-deps"
 
     - name: Run tests
-      run: xvfb-run mvn test
+      run: mvn test
 
     # Upload reports even if tests fail
     - name: Upload Test Reports
