@@ -1,0 +1,43 @@
+trigger:
+- main
+
+pool:
+  name: PlaywrightPool
+
+steps:
+
+- checkout: self
+
+- task: Maven@4
+  displayName: Build Project
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'clean install -DskipTests'
+
+- script: |
+    mvn exec:java -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install"
+  displayName: Install Playwright Browsers
+
+- task: Maven@4
+  displayName: Run Playwright Tests
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'test'
+
+- task: PublishBuildArtifacts@1
+  condition: always()
+  inputs:
+    PathtoPublish: 'Report'
+    ArtifactName: 'ExtentReport'
+
+- task: PublishBuildArtifacts@1
+  condition: always()
+  inputs:
+    PathtoPublish: 'target'
+    ArtifactName: 'Target'
+
+- task: PublishBuildArtifacts@1
+  condition: always()
+  inputs:
+    PathtoPublish: 'test-output'
+    ArtifactName: 'TestOutput'
